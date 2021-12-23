@@ -1,4 +1,4 @@
-# Table of contents
+#  Table of contents
 
 - [Introduction](#introduction)
 - [Numerical Data Representation](#numerical-data-representation)
@@ -132,7 +132,7 @@ In computer system storage are divided into two categories.
   - Clock
 - All components work together to allow processing and system control.
 
-###### ![image-20211215100111134](images/image-20211215100111134.png)
+![image-20211215100111134](images/image-20211215100111134.png)
 
 - **Control Unit (CU)**
   - It issues control signals that control hardware
@@ -150,15 +150,16 @@ In computer system storage are divided into two categories.
 - **Clock**
   - The CPU contains a clock which is used to coordinate all of the computer's components. 
   - The clock sends out a regular electrical pulse which synchronizes (keeps in time) all the components.
-
 # Registers
-
 - Registers are small amounts of high-speed memory contained within the CPU. 
 - They are used by the processor to store small amounts of data that are needed during processing, such as
   - the address of the next instruction to be executed
   - the current instruction being decoded
   - the results of calculations
 - Different processors have different numbers of registers for different purposes, but most have some, or all, of the following:
+
+
+
 - **Memory Address Register (MAR)**
   - holds the address of the current instruction that is to be fetched from memory, or the address in memory to which data is to be transferred.
 - **Current Instruction Register (CIR)**
@@ -239,8 +240,120 @@ We can construct this bus system by using Multiplexers. Below is the Bus system 
 
 ![Screenshot 2021-12-15 104104](images/Screenshot%202021-12-15%20104104.png)
 
+> Bus system for 4 Registers each size of 4bits & Signal input to select particular register.
+
 **General Formula to calculate how many multiplexer and what size of multiplexer will be needed.**
 
 To build a bus system with **k** register made up of **n** bits, we will require **n** number of multiplexer with the size of **k x 1** multiplexer.
 
 e.g. To build bus system of **8** register with the size of **16** bits, we will require **16** multiplexer with the size **8 x 1**.
+
+# Common Bus System using Tri State Buffer
+
+In previous topic we have make a common bus by the use of multiple multiplexers. Instead of multiplexer we can also use tri state buffer and a decoder to make a common bus system.
+
+Usually a buffer has 1 input and 1 output. Buffer produce same output as a input unlike other logic gates. Generally buffer is used to amplify a signal.
+
+Tri state buffer has 3 pins as shown in below diagram.
+
+![image-20211217093017243](images/image-20211217093017243.png)
+
+As you can see unlike buffer which only has input and output, tri state buffer also has third pin known as enabled. Only when enabled is set to 1 the output is produced, and when enabled is set to 0 the output is High Z or High Impedance. High Z means it will behave like open circuit or circuit is disconnected.
+
+**To form a bus using tri state buffer**
+
+- Bits of each register is connected to one buffer
+- Output of buffer is connected to together to single line
+- Enable control input will now decide which line (which register bit) will be selected as a ouput.
+- Decoder is used to decide the enable input for particular buffer.
+
+![image-20211217094827669](images/image-20211217094827669.png)
+
+> Below is the illustration of bus system using tri state buffer
+
+In above diagram we have made a bus system for 4 register and 1 bit, same circuit can be scaled up/down to accommodate multiple registers with multiple bits.
+
+# Elementary Micro Operation .
+
+Elementary Operation Performed with the data stored in registers can be classified into below four categories.
+
+1. **Register transfer** micro-operations transfer binary information from one register to another.
+2. **Arithmetic micro-operations** perform arithmetic operation on numeric data stored in registers.
+3. **Logic micro-operations** perform bit manipulation operations on non-numeric data stored in
+registers.
+4. **Shift micro-operations** perform shift operations on data stored in registers.
+
+# Arithmetic Micro Operations
+
+Basic arithmetic micro operations
+
+- Addition
+- Subtraction
+- Increment
+- Decrement
+- Shift
+
+**Addition**
+
+R3 ← R1 + R2
+
+specifies an add operation. It states that contents of register R1 are added to the contents of register R2 and the sum transferred to register R3.
+
+**Subtraction**
+
+![image-20211221151402300](images/image-20211221151402300.png)
+
+![image-20211221151430510](images/image-20211221151430510.png) is symbol for 1's complement of R2. Adding 1 to the 1's complement produces the 2's complement.
+Adding the contents of R1 to the 2's complement of R2 is equivalent to R1 – R2.
+
+![image-20211221151601921](images/image-20211221151601921.png)
+
+> Basic set of Micro Operations
+
+# Binary Adder Circuit
+
+Full Adder performs the addition of two one bit numbers and also the  carry input. For performing the addition of binary numbers with more  than one bit, more than one full adder is required and the number of  Full Adders depends on the number bits. By connecting n number of full adders in parallel, an n-bit Parallel Adder can be constructed.
+
+**4 bit binary adder**
+
+The following figure shows a Parallel 4-bit Binary Adder, which has three full adders and one half adder. The two binary numbers to be added are  'A3 A2 A1 A0'  and  'B3 B2 B1 B0', which are applied to the corresponding inputs of the Full Adders. This parallel adder produces their result as  'C4 S3 S2 S1 S0' , where C4 is the final carry. 
+
+![CO Diagrams-4 Bit Adder.drawio](images/CO%20Diagrams-4%20Bit%20Adder.drawio.png)
+
+> 4 bit binary adder circuit
+
+# Binary Subtractor Circuit
+
+We know that binary number can be substracted using 2's complement.
+
+for example A - B can be represented as A + B' + 1. Thus if we add 2's complement of a second number (here B) to first number (A) it is equivalent to A - B
+
+So we can use similar adder circuit to build subtractor circuit. Here we have to pass the 1's Complement second number and we have to add 1 to the sum. So we can use NOT gate to get 1's complement of the number and to add 1 we can pass C0 (Carry 0 - Initial Carry) as 1.
+
+![CO Diagrams-4 Bit Subtracter.drawio](images/CO%20Diagrams-4%20Bit%20Subtracter.drawio.png)
+
+> 4 bit binary subtractor circuit
+
+# Adder and Subtractor Combinational Circuit
+
+![CO Diagrams-4 Bit Adder Subtracter.drawio](images/CO%20Diagrams-4%20Bit%20Adder%20Subtracter.drawio.png)
+
+# Binary Incrementer Circuit
+
+![CO Diagrams-4 Bit Increment.drawio](images/CO%20Diagrams-4%20Bit%20Increment.drawio.png)
+
+# Binary Decrementer Circuit
+
+![CO Diagrams-4 Bit Decrement.drawio](images/CO%20Diagrams-4%20Bit%20Decrement.drawio.png)
+
+# Register Shift
+
+![CO Diagrams-Register Logical Shift.drawio_cr](images/CO%20Diagrams-Register%20Logical%20Shift.drawio_cr.png)
+
+![CO Diagrams-Register Circular Shift.drawio_cr](images/CO%20Diagrams-Register%20Circular%20Shift.drawio_cr.png)
+
+![CO Diagrams-Register ArithmeticShift.drawio_cr](images/CO%20Diagrams-Register%20ArithmeticShift.drawio_cr.png)
+
+# Register Shift Circuit
+
+![CO Diagrams-Shift Left and Right Circuit.drawio](images/CO%20Diagrams-Shift%20Left%20and%20Right%20Circuit.drawio.png)
