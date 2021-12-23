@@ -19,7 +19,7 @@
 - [Register Transfer Language](#register-transfer-language)
 - [Common Bus System and Memory Transfer](#common-bus-system-and-memory-transfer)
 - [Common Bus System using Tri State Buffer](#common-bus-system-using-tri-state-buffer)
-- [Elementary Micro Operation .](#elementary-micro-operation-)
+- [Elementary Micro Operation](#elementary-micro-operation)
 - [Arithmetic Micro Operations](#arithmetic-micro-operations)
 - [Binary Adder Circuit](#binary-adder-circuit)
 - [Binary Subtractor Circuit](#binary-subtractor-circuit)
@@ -283,7 +283,7 @@ As you can see unlike buffer which only has input and output, tri state buffer a
 
 In above diagram we have made a bus system for 4 register and 1 bit, same circuit can be scaled up/down to accommodate multiple registers with multiple bits.
 
-# Elementary Micro Operation .
+# Elementary Micro Operation
 
 Elementary Operation Performed with the data stored in registers can be classified into below four categories.
 
@@ -328,7 +328,7 @@ Full Adder performs the addition of two one bit numbers and also the  carry inpu
 
 The following figure shows a Parallel 4-bit Binary Adder, which has three full adders and one half adder. The two binary numbers to be added are  'A3 A2 A1 A0'  and  'B3 B2 B1 B0', which are applied to the corresponding inputs of the Full Adders. This parallel adder produces their result as  'C4 S3 S2 S1 S0' , where C4 is the final carry. 
 
-![CO Diagrams-4 Bit Adder.drawio](images/CO%20Diagrams-4%20Bit%20Adder.drawio.png)
+![4-Bit-Adder](images/4-Bit-Adder.png)
 
 > 4 bit binary adder circuit
 
@@ -340,30 +340,32 @@ for example A - B can be represented as A + B' + 1. Thus if we add 2's complemen
 
 So we can use similar adder circuit to build subtractor circuit. Here we have to pass the 1's Complement second number and we have to add 1 to the sum. So we can use NOT gate to get 1's complement of the number and to add 1 we can pass C0 (Carry 0 - Initial Carry) as 1.
 
-![CO Diagrams-4 Bit Subtracter.drawio](images/CO%20Diagrams-4%20Bit%20Subtracter.drawio.png)
+![4-Bit-Subtracter](images/4-Bit-Subtracter.png)
 
 > 4 bit binary subtractor circuit
 
 # Adder and Subtractor Combinational Circuit
 
-![CO Diagrams-4 Bit Adder Subtracter.drawio](images/CO%20Diagrams-4%20Bit%20Adder%20Subtracter.drawio.png)
+![4-Bit-Adder-Subtracter](images/4-Bit-Adder-Subtracter.png)
 
 # Binary Incrementer Circuit
 
-![CO Diagrams-4 Bit Increment.drawio](images/CO%20Diagrams-4%20Bit%20Increment.drawio.png)
+![4-Bit-Increment](images/4-Bit-Increment.png)
 
 # Binary Decrementer Circuit
 
-![CO Diagrams-4 Bit Decrement.drawio](images/CO%20Diagrams-4%20Bit%20Decrement.drawio.png)
+![4-Bit-Decrement](images/4-Bit-Decrement.png)
 
 # Register Shift
 
-![CO Diagrams-Register Logical Shift.drawio_cr](images/CO%20Diagrams-Register%20Logical%20Shift.drawio_cr.png)
+![Register-Logical-Shift](images/Register-Logical-Shift.png)
 
-![CO Diagrams-Register Circular Shift.drawio_cr](images/CO%20Diagrams-Register%20Circular%20Shift.drawio_cr.png)
+![Register-Circular-Shift](images/Register-Circular-Shift.png)
 
-![CO Diagrams-Register ArithmeticShift.drawio_cr](images/CO%20Diagrams-Register%20ArithmeticShift.drawio_cr.png)
+![Register-ArithmeticShift](images/Register-ArithmeticShift.png)
 
 # Register Shift Circuit
 
-![CO Diagrams-Shift Left and Right Circuit.drawio](images/CO%20Diagrams-Shift%20Left%20and%20Right%20Circuit.drawio.png)
+![Shift-Left-and-Right-Circuit](images/Shift-Left-and-Right-Circuit.png)
+
+> Here IR - Initial Serial Right Input and IL = Initial Serial Left Input
