@@ -1,4 +1,4 @@
-#  Table of contents
+# Table of contents
 
 - [Introduction](#introduction)
 - [Numerical Data Representation](#numerical-data-representation)
@@ -18,6 +18,16 @@
 - [The fetch-execute cycle](#the-fetch-execute-cycle)
 - [Register Transfer Language](#register-transfer-language)
 - [Common Bus System and Memory Transfer](#common-bus-system-and-memory-transfer)
+- [Common Bus System using Tri State Buffer](#common-bus-system-using-tri-state-buffer)
+- [Elementary Micro Operation .](#elementary-micro-operation-)
+- [Arithmetic Micro Operations](#arithmetic-micro-operations)
+- [Binary Adder Circuit](#binary-adder-circuit)
+- [Binary Subtractor Circuit](#binary-subtractor-circuit)
+- [Adder and Subtractor Combinational Circuit](#adder-and-subtractor-combinational-circuit)
+- [Binary Incrementer Circuit](#binary-incrementer-circuit)
+- [Binary Decrementer Circuit](#binary-decrementer-circuit)
+- [Register Shift](#register-shift)
+- [Register Shift Circuit](#register-shift-circuit)
 
 # Introduction
 
