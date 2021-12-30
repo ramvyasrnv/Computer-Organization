@@ -1,3 +1,19 @@
+# Table of contents
+
+- [Instruction Codes](#instruction-codes)
+- [Stored Program Organization](#stored-program-organization)
+- [Instruction format of Basic Computer](#instruction-format-of-basic-computer)
+- [Direct and Indirect Addressing of Memory](#direct-and-indirect-addressing-of-memory)
+  - [Example of Direct Addressing](#example-of-direct-addressing)
+- [Example of Indirect Addressing](#example-of-indirect-addressing)
+- [Computer Instruction](#computer-instruction)
+  - [Memory - reference instruction](#memory---reference-instruction)
+  - [Register - reference instruction](#register---reference-instruction)
+  - [Input - Output instruction](#input---output-instruction)
+- [Instruction Set Completeness](#instruction-set-completeness)
+- [Computer Registers](#computer-registers)
+- [Common Bus System of Computer](#common-bus-system-of-computer)
+
 # Instruction Codes
 
 **Program**
@@ -135,7 +151,20 @@ Instruction of basic computer can be divided into three parts.
 
 # Computer Registers
 
+| Register             | Symbol | Number of bits | Function                         |
+| -------------------- | ------ | -------------- | -------------------------------- |
+| Data register        | DR     | 16             | Holds memory operand             |
+| Address register     | AR     | 12             | Holds address for the memory     |
+| Accumulator          | AC     | 16             | Processor register               |
+| Instruction register | IR     | 16             | Holds instruction code           |
+| Program counter      | PC     | 12             | Holds address of the instruction |
+| Temporary register   | TR     | 16             | Holds temporary data             |
+| Input register       | INPR   | 8              | Carries input character          |
+| Output register      | OUTR   | 8              | Carries output character         |
+
 ![image-20211230103030733](images/image-20211230103030733.png)
+
+> Visual representation of registers and its size
 
 # Common Bus System of Computer
 
