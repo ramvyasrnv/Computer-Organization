@@ -27,7 +27,19 @@
 - [Binary Incrementer Circuit](#binary-incrementer-circuit)
 - [Binary Decrementer Circuit](#binary-decrementer-circuit)
 - [Register Shift](#register-shift)
+  - [Logical Shift](#logical-shift)
+  - [Circular Shift](#circular-shift)
+  - [Arithmetic Shift](#arithmetic-shift)
 - [Register Shift Circuit](#register-shift-circuit)
+- [Logic Micro Operation](#logic-micro-operation)
+- [Logic Circuit](#logic-circuit)
+- [Application of Logic Micro Operation](#application-of-logic-micro-operation)
+  - [Selective Set](#selective-set)
+  - [Selective Complement](#selective-complement)
+  - [Selective Clear](#selective-clear)
+  - [Mask](#mask)
+  - [Clear](#clear)
+- [ALSU (Arithmetic Logic Shift Unit)](#alsu-arithmetic-logic-shift-unit)
 
 # Introduction
 
@@ -350,22 +362,131 @@ So we can use similar adder circuit to build subtractor circuit. Here we have to
 
 # Binary Incrementer Circuit
 
+Binary Incrementer circuit can be constructed using half adder as follows. Here Initial carry is passed as 1 as we want to add 1 to the number and output of each generated carry is passed to next half adder as an input along with other input of bit of register.
+
 ![4-Bit-Increment](images/4-Bit-Increment.png)
 
 # Binary Decrementer Circuit
+
+Binary decrementer circuit can be implemented using full adder similar to adder circuit. As shown below we can decrement a number by adding 2's complement of 1 which we want to subtract. So as shown below we can pass second input as 1 in all full adder.
+
+![image-20211229124915850](images/image-20211229124915850.png)
 
 ![4-Bit-Decrement](images/4-Bit-Decrement.png)
 
 # Register Shift
 
+The information stored within these registers can be transferred with the help of shift registers. Content (bits) of register can be shifted to left or right.
+
+Depending of shift of data we can categorized shift operation into three types
+
+1. Logical Shift
+2. Circular Shift
+3. Arithmetic Shift
+
+## Logical Shift
+
+In logical left shift one position moves each bit to the left one by one. The Empty least significant bit (LSB) is filled with zero (i.e, the serial input), and the most significant bit (MSB) is rejected.
+
+In logical right one position moves each bit to the right one by one and the  least significant bit(LSB) is rejected and the empty MSB is filled with  zero.
+
 ![Register-Logical-Shift](images/Register-Logical-Shift.png)
+
+## Circular Shift
+
+In logical shift some data is lost, i.e. MSB bit in logical shift left and LSB in logical right shift is lost during shift operation.
+
+In circular shift the shift is done without any loss of information.
+
+In circular left shift all bits are move by one bit on the left and first bit (MSB) is moved to last bit (LSB)
+
+In circular left shift all bits are move by one bit on the right and last bit (LSB) is moved to first bit (MSB)
 
 ![Register-Circular-Shift](images/Register-Circular-Shift.png)
 
+## Arithmetic Shift
+
+This operation is generally used to shift signed binary number to left or right. Arithmetic left operation multiplies the number by 2 and arithmetic right operation divides the number by 2.
+
+In arithmetic shift left one position moves each bit to the left one by one. The empty  least significant bit (LSB) is filled with zero and the most significant bit (MSB) is rejected. Same as the Left Logical Shift. This is similar to logical shift left.
+
+In arithmetic shift right one position moves each bit to the right one by one and the  least significant bit is rejected and the empty MSB is filled with the value of the previous MSB.
+
 ![Register-ArithmeticShift](images/Register-ArithmeticShift.png)
+
+**Arithmetic Left Shift Overflow**
+
+In arithmetic shift left, overflow can occur as when we shift number to left, it multiplies the number and if result number exceeds the size of register the information is truncated (lost), this is known as overflow.
 
 # Register Shift Circuit
 
 ![Shift-Left-and-Right-Circuit](images/Shift-Left-and-Right-Circuit.png)
 
 > Here IR - Initial Serial Right Input and IL = Initial Serial Left Input
+
+# Logic Micro Operation
+
+- Logic micro operations are performed on a bits of register. Each bit is considered as separately.
+- Logic micro operation can be used to manipulate single bit or part of bits.
+- Logic micro operations are performed using various logic gates.
+
+![image-20211230092902659](images/image-20211230092902659.png)
+
+![image-20211230093004600](images/image-20211230093004600.png)
+
+# Logic Circuit
+
+![Logic-Circuit](images/Logic-Circuit.png)
+
+![image-20211230093537090](images/image-20211230093537090.png)
+
+# Application of Logic Micro Operation
+
+- Logic micro operation can be used to manipulate individual bits of a register.
+- Below are some operations which can be performed.
+  - selective set
+  - selective complement
+  - select clear
+  - mask
+  - clear
+
+## Selective Set
+
+- Selective-set sets to 1 the bits in register A where there is a corresponding bit as 1 in register B:
+- This can be performed using OR operation.
+
+![image-20211230093716546](images/image-20211230093716546.png)
+
+## Selective Complement
+
+- Selective-complement complements the bits in register A where there is a corresponding bit as 1 in register B
+- This can be performed using EX-OR operation
+
+![image-20211230093811164](images/image-20211230093811164.png)
+
+## Selective Clear
+
+- Selective-clear clears to 0 the bits in register A where there is a corresponding bit as 1 in register B
+- This can be done using logical AND operation and B’
+
+![image-20211230093906190](images/image-20211230093906190.png)
+
+## Mask
+
+- Mask clears to 0 the bits in register A where there is a corresponding 0 in register B
+- This can be performed using logical AND operation and B
+
+![image-20211230093940601](images/image-20211230093940601.png)
+
+## Clear
+
+- Clear compares A and B and produces all 0s if the numbers are equal. (if A and B both are 0 then bit is set to 0, otherwise unchanged).
+- This can be done using EX-OR operation
+
+![image-20211230094017237](images/image-20211230094017237.png)
+
+
+
+# ALSU (Arithmetic Logic Shift Unit)
+
+![image-20211230094406655](images/image-20211230094406655.png)
