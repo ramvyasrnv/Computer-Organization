@@ -10,9 +10,16 @@
   - [Memory - reference instruction](#memory---reference-instruction)
   - [Register - reference instruction](#register---reference-instruction)
   - [Input - Output instruction](#input---output-instruction)
+- [Basic Set of Instructions](#basic-set-of-instructions)
+  - [Memory Reference Instructions](#memory-reference-instructions)
+  - [Register Reference Instructions](#register-reference-instructions)
+  - [IO Reference Instructions](#io-reference-instructions)
 - [Instruction Set Completeness](#instruction-set-completeness)
 - [Computer Registers](#computer-registers)
 - [Common Bus System of Computer](#common-bus-system-of-computer)
+- [Control Organization](#control-organization)
+- [Control Unit of Basic Computer](#control-unit-of-basic-computer)
+- [Example of Timing and Control](#example-of-timing-and-control)
 
 # Instruction Codes
 
@@ -129,6 +136,60 @@ Instruction of basic computer can be divided into three parts.
 > - The three operation code bits in positions 12 through 14 should be equal to 111. Otherwise, the instruction is a memory-reference type, and the bit in position 15 is taken as the addressing mode I.
 > - When the three operation code bits are equal to 111, control unit inspects the bit in position 15. If the bit is 0, the instruction is a register-reference type. Otherwise, the instruction is an input-output type having bit 1 at position 15.
 
+# Basic Set of Instructions
+
+## Memory Reference Instructions
+
+- Instructions references memory address
+- I Bit is 0 / 1 Depending on direct or indirect addressing
+- Opcode ranges form 000 to 110
+
+| **Symbol** | **Hexadecimal Code** | **Description** |                                |
+| ---------- | -------------------- | --------------- | ------------------------------ |
+| AND        | 0xxx                 | 8xxx            | And memory word to AC          |
+| ADD        | 1xxx                 | 9xxx            | Add memory word to AC          |
+| LDA        | 2xxx                 | Axxx            | Load memory word to AC         |
+| STA        | 3xxx                 | Bxxx            | Store AC content in memory     |
+| BUN        | 4xxx                 | Cxxx            | Branch Unconditionally         |
+| BSA        | 5xxx                 | Dxxx            | Branch and Save Return Address |
+| ISZ        | 6xxx                 | Exxx            | Increment and skip if 0        |
+
+## Register Reference Instructions
+
+- Instructions performed on register (Generally AC)
+- I Bit is 0, and OpCode is set to 111.
+- Bit 0 to 11 represents the operation
+
+| **Symbol** | **Hexadecimal Code** | **Description**                 |
+| ---------- | -------------------- | ------------------------------- |
+| CLA        | 7800                 | Clear AC                        |
+| CLE        | 7400                 | Clear E(overflow bit)           |
+| CMA        | 7200                 | Complement AC                   |
+| CME        | 7100                 | Complement E                    |
+| CIR        | 7080                 | Circulate right AC and E        |
+| CIL        | 7040                 | Circulate left AC and E         |
+| INC        | 7020                 | Increment AC                    |
+| SPA        | 7010                 | Skip next instruction if AC > 0 |
+| SNA        | 7008                 | Skip next instruction if AC < 0 |
+| SZA        | 7004                 | Skip next instruction if AC = 0 |
+| SZE        | 7002                 | Skip next instruction if E = 0  |
+| HLT        | 7001                 | Halt computer                   |
+
+## IO Reference Instructions
+
+- Instructions performed on Input Output information
+- I Bit is 1, and OpCode is set to 111.
+- Bit 0 to 11 represents the operation
+
+| **Symbol** | **Hexadecimal Code** | **Description**          |
+| ---------- | -------------------- | ------------------------ |
+| INP        | F800                 | Input character to AC    |
+| OUT        | F400                 | Output character from AC |
+| SKI        | F200                 | Skip on input flag       |
+| SKO        | F100                 | Skip on output flag      |
+| ION        | F080                 | Interrupt On             |
+| IOF        | F040                 | Interrupt Off            |
+
 # Instruction Set Completeness
 
 - A set of instructions is said to be complete if the computer includes a sufficient number of instructions in each of the following categories:
@@ -169,3 +230,40 @@ Instruction of basic computer can be divided into three parts.
 # Common Bus System of Computer
 
 ![image-20211230103155351](images/image-20211230103155351.png)
+
+# Control Organization
+
+- **Hardwired Control**
+  - The control logic is implemented with gates, flips-flops, decoders and other digital circuits.
+  - It can be optimized to produce a fast mode of operation.
+  - It requires changes in the wiring among the various components if the design has to be modified or changed.
+- **Microprogrammed Control**
+  - The control information is stored in a control memory.
+  - The control memory is programmed to initiate the required sequence of micro-operations.
+  - Any required changes or modifications can be done by updating the microprogram in control memory.
+
+# Control Unit of Basic Computer
+
+![image-20211231100249900](images/image-20211231100249900.png)
+
+- An instruction read from memory is placed in the instruction register (IR).
+- In control unit the IR is divided into three parts: I bit, the operation code (12-14)bit, and bits 0 through 11.
+- The operation code in bits 12 through 14 are decoded with a 3 x 8 decoder.
+- Bit-15 of the instruction is transferred to a flip-flop designated by the symbol I.
+- The eight outputs of the decoder are designated by the symbols D0 through D7. 
+- Bits 0 through 11 are applied to the control logic gates.
+- The 4‐bit sequence counter can count in binary from 0 through 15. The outputs of counter are decoded into 16 timing signals T0 through T15.
+- The sequence counter SC can be incremented or cleared synchronously.
+- Most of the time, the counter is incremented to provide the sequence of timing signals out of 4 X 16 decoder.
+- Once in awhile, the counter is cleared to 0, causing the next timing signal to be T0.
+
+# Example of Timing and Control
+
+- As an example, consider the case where SC is incremented to provide timing signals T0, T1, T2, T3 and T4 in sequence. At time T4, SC is cleared to 0 if decoder output D3 is active. This is expressed symbolically by the statement 
+- **D3T4:  SC ← 0**
+- Initially, the CLR input of SC is active.
+- The first positive transition of the clock clears SC to 0, which in turn activates the timing T0 out of the decoder.
+- T0 is active during one clock cycle.
+- The positive clock transition labeled T0 in the diagram will trigger only those registers whose control inputs are connected to timing signal T0.
+
+![image-20211231100504720](images/image-20211231100504720.png)
