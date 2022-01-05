@@ -154,6 +154,14 @@ Instruction of basic computer can be divided into three parts.
 | BSA        | 5xxx                 | Dxxx            | Branch and Save Return Address |
 | ISZ        | 6xxx                 | Exxx            | Increment and skip if 0        |
 
+![RTL of Memoery Operations](images/RTL%20of%20Memoery%20Operations.png)
+
+> RTL of Memory Reference Instruction
+
+![BSA and BUN](images/BSA%20and%20BUN.png)
+
+> BUN and BSA Instruction
+
 ## Register Reference Instructions
 
 - Instructions performed on register (Generally AC)
@@ -267,3 +275,51 @@ Instruction of basic computer can be divided into three parts.
 - The positive clock transition labeled T0 in the diagram will trigger only those registers whose control inputs are connected to timing signal T0.
 
 ![image-20211231100504720](images/image-20211231100504720.png)
+
+# Instruction Cycle
+
+- Program is stored in memory as an sequence of instructions. Each instruction cycle consists of below phases
+  - Fetch instruction from memory
+  - Decode instruction
+  - Read effective address if instruction has indirect address
+  - Execute instruction.
+- These four steps are repeated for each instruction and process ends when it encounter HALT instruction.
+
+
+
+**Fetch and Decode**
+
+- PC (Program Counter) is loaded with first instruction of program.
+- Below is the micro operation for fetch and decode.
+  - 𝑻𝟎  : 𝑨𝑹←𝑷𝑪
+  - 𝑻𝟏  : 𝑰𝑹←𝑴[𝑨𝑹], 𝑷𝑪←𝑷𝑪+𝟏
+  - 𝑻𝟐  :𝑫_𝟎,…,𝑫_𝟕←𝑫𝒆𝒄𝒐𝒅𝒆 𝑰𝑹(𝟏𝟐−𝟏𝟒),  𝑨𝑹←𝑰𝑹(𝟎−𝟏𝟏),  𝑰←𝑰𝑹(𝟏𝟓)
+
+**Determine type of instruction**
+
+- During time 𝑇3, the control unit determines the type of instruction i.e. Memory reference, Register reference or Input-Output instruction.
+- If 𝐷7=1 then instruction must be register reference or input-output else memory reference instruction.
+
+![image-20220105081020959](images/image-20220105081020959.png)
+
+# Input Output Operation
+
+![image-20220105081100308](images/image-20220105081100308.png)
+
+# Interrupt Cycle
+
+![image-20220105081138480](images/image-20220105081138480.png)
+
+- The interrupt cycle is a hardware implementation of a branch and save return address operation.
+- An interrupt flip-flop R is included in the computer. 
+- When R = 0, the computer goes through an instruction cycle.
+- During the execute phase of the instruction cycle IEN is checked by the control.
+- If it is 0, it indicates that the programmer does not want to use the interrupt, so control continues with the next instruction cycle. 
+- If IEN is 1, control checks the flag bits. 
+- If both flags are 0, it indicates that neither the input nor the output registers are ready for transfer of information. 
+- In this case, control continues with the next instruction cycle. If either flag is set to 1 while IEN = 1, flip-flop R is set to 1. 
+- At the end of the execute phase, control checks the value of R, and if it is equal to 1, it goes to an interrupt cycle instead of an instruction cycle.
+
+# Design of Basic Computer (Flowchart of Basic Computer)
+
+![image-20220105081626093](images/image-20220105081626093.png)
