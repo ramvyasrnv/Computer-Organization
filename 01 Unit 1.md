@@ -374,6 +374,25 @@ Binary decrementer circuit can be implemented using full adder similar to adder 
 
 ![4-Bit-Decrement](images/4-Bit-Decrement.png)
 
+# Arithmetic Circuit
+
+![Arithmetic-Circuit](images/Arithmetic-Circuit.png)
+
+> 4 bit Arithmetic Circuit
+
+> Truth Table for Arithmetic Circuit
+
+| S0   | S1   | C0   | MUX Output | Full Adder Output  |
+| ---- | ---- | ---- | ---------- | ------------------ |
+| 0    | 0    | 0    | B          | A + B              |
+| 0    | 0    | 1    | B          | A + B + 1          |
+| 0    | 1    | 0    | B’         | A + B’             |
+| 0    | 1    | 1    | B’         | A + B’ + 1 = A – B |
+| 1    | 0    | 0    | 0          | A                  |
+| 1    | 0    | 1    | 0          | A + 1              |
+| 1    | 1    | 0    | 1          | A – 1              |
+| 1    | 1    | 1    | 1          | A – 1 + 1 = A      |
+
 # Register Shift
 
 The information stored within these registers can be transferred with the help of shift registers. Content (bits) of register can be shifted to left or right.
