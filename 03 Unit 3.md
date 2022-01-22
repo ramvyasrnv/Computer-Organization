@@ -71,13 +71,13 @@ Location  	Instruction Code in Hexadecimal
 
 ```assembly
 Location 	Instruction		Comment     
-000			LDA 004 		/Load first operand  into AC 
-001			ADD 005 		/Add second operand  to AC   
-002			STA 006 		/Store sum in  location 006  
-003			HLT  			/Halt  computer     
-004			0053 			/First operand      
-005			FFE9 			/Second  operand (negative)  
-006			0000 			/Store sum here     
+000		LDA 004 		/Load first operand  into AC 
+001		ADD 005 		/Add second operand  to AC   
+002		STA 006 		/Store sum in  location 006  
+003		HLT  			/Halt  computer     
+004		0053 			/First operand      
+005		FFE9 			/Second  operand (negative)  
+006		0000 			/Store sum here     
 ```
 
 
