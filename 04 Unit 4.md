@@ -1,13 +1,45 @@
-# Unit -4  Central Processing Unit and Pipeline Processing
-# Topics Covered
--  Stack Organization
--  General Register Organization
--  Instruction format
--  Addressing Modes, data transfer and manipulation, 
--  Program Control
--  Reduced Instruction Set Computer (RISC) 
--  Complex Instruction Set Computer (CISC)
--  Parallel processing
+# Table of contents
+
+- [Stack Organization](#stack-organization)
+  - [Register Stack](#register-stack)
+  - [Memory Stack](#memory-stack)
+- [Reverse Polish Notation](#reverse-polish-notation)
+  - [Evaluation of Arithmetic Expression](#evaluation-of-arithmetic-expression)
+- [General Register based CPU Organization](#general-register-based-cpu-organization)
+  - [Advantages of General register based CPU organization](#advantages-of-general-register-based-cpu-organization)
+  - [Disadvantages of General register based CPU organization](#disadvantages-of-general-register-based-cpu-organization)
+- [Instruction Format](#instruction-format)
+  - [Three Address Instructions](#three-address-instructions)
+  - [Two Address Instructions](#two-address-instructions)
+  - [One Address Instruction](#one-address-instruction)
+  - [Zero Address Instruction](#zero-address-instruction)
+  - [RISC Instruction](#risc-instruction)
+- [Addressing Modes](#addressing-modes)
+  - [Implied Mode](#implied-mode)
+  - [Immediate Mode](#immediate-mode)
+  - [Register Mode](#register-mode)
+  - [Register Indirect Mode](#register-indirect-mode)
+  - [Auto increment or Auto decrement Mode](#auto-increment-or-auto-decrement-mode)
+  - [Direct Address Mode](#direct-address-mode)
+  - [Indirect Address Mode](#indirect-address-mode)
+  - [Relative Address Mode](#relative-address-mode)
+  - [Indexed Addressing Mode](#indexed-addressing-mode)
+  - [Base Register Addressing Mode](#base-register-addressing-mode)
+- [Data transfer and manipulation Instructions](#data-transfer-and-manipulation-instructions)
+  - [Data Transfer Instructions](#data-transfer-instructions)
+  - [Data Manipulation Instructions](#data-manipulation-instructions)
+- [Program Control](#program-control)
+  - [Status bit Condition](#status-bit-condition)
+  - [Branch instructions dependent on status bit value.](#branch-instructions-dependent-on-status-bit-value)
+  - [Unsigned compare conditions](#unsigned-compare-conditions)
+  - [Signed compare conditions](#signed-compare-conditions)
+- [Program Interrupt](#program-interrupt)
+  - [External Interrupt](#external-interrupt)
+  - [Internal interrupts (Traps)](#internal-interrupts-traps)
+  - [Software interrupts](#software-interrupts)
+- [RISC & CISC](#risc--cisc)
+  - [RISC and CISC Comparison](#risc-and-cisc-comparison)
+
 # Stack Organization
 -  A stack is a storage device that stores information in such a manner that the item stored last is the first item retrieved (LIFO).
 -  The register that holds the address for the stack is called a stack pointer (SP) because its value always points at the top item in the stack. 
@@ -233,6 +265,184 @@
 
 > **Effective address = address part of instruction + content of base register**
 
+# Data transfer and manipulation Instructions
+
+## Data Transfer Instructions
+
+- Data transfer instructions move data from one place in the computer to another without changing the data content. 
+- The most common transfers are between memory and processor registers, between processor registers and input or output, and between the processor registers themselves.
+
+| **Name** | **Mnemonic** |
+| -------- | ------------ |
+| Load     | LD           |
+| Store    | ST           |
+| Move     | MOV          |
+| Exchange | XCH          |
+| Input    | IN           |
+| Output   | OUT          |
+| Push     | PUSH         |
+| Pop      | POP          |
+
+## Data Manipulation Instructions
+
+- The data manipulation instructions in a typical computer are usually divided into three basic types:
+  - Arithmetic instructions
+  - Logical and bit manipulation instructions
+  - Shift instructions
+
+### Arithmetic Instructions
+
+| **Name**                | **Mnemonic** |
+| ----------------------- | ------------ |
+| Increment               | INC          |
+| Decrement               | DEC          |
+| Add                     | ADD          |
+| Subtract                | SUB          |
+| Multiply                | MUL          |
+| Divide                  | DIV          |
+| Add  with carry         | ADDC         |
+| Subtract with  borrow   | SUBB         |
+| Negate (2’s complement) | NEG          |
+
+### Logical & Bit Manipulation Instructions
+
+| **Name**           | **Mnemonic** |
+| ------------------ | ------------ |
+| Clear              | CLR          |
+| Complement         | COM          |
+| AND                | AND          |
+| OR                 | OR           |
+| Exclusive-OR       | XOR          |
+| Clear carry        | CLRC         |
+| Set carry          | SETC         |
+| Complement carry   | COMC         |
+| Enable interrupt   | EI           |
+| Disable  interrupt | DI           |
+
+### Shift Instructions
+
+| **Name**                   | **Mnemonic** |
+| -------------------------- | ------------ |
+| Logical  shift right       | SHR          |
+| Logical  shift left        | SHL          |
+| Arithmetic  shift right    | SHRA         |
+| Arithmetic  shift left     | SHLA         |
+| Rotate  right              | ROR          |
+| Rotate left                | ROL          |
+| Rotate right through carry | RORC         |
+| Rotate left through carry  | ROLC         |
+
+# Program Control
+
+- A program control type of instruction, when executed, may change the address value in the program counter and cause the flow of control to be altered.
+- The change in value of the program counter as a result of the execution of a program control instruction causes a break in the sequence of instruction execution.
+
+| **Name**                  | **Mnemonic** |
+| ------------------------- | ------------ |
+| Branch                    | BUN          |
+| Jump                      | JMP          |
+| Skip                      | SKP          |
+| Call                      | CALL         |
+| Return                    | RET          |
+| Compare (by  subtraction) | CMP          |
+| Test (by ANDing)          | TST          |
+
+## Status bit Condition
+
+![image-20220215080023179](images/image-20220215080023179.png)
+
+- Bit C (carry) is set to 1 if the end carry C8 is 1. It is cleared to 0 if the carry is 0.
+- Bit S (sign) is set to 1 if the highest-order bit F7 is 1. It is set to 0 if the bit is 0.
+- Bit Z (zero) is set to 1 if the output is zero and Z = 0 if the output is not zero.
+- Bit V (overflow) is set to 1 if the exclusive-OR of the last two carries is equal to 1, and cleared to 0 otherwise. This is the condition for an overflow when negative numbers are in 2’s complement.
+
+## Branch instructions dependent on status bit value.
+
+| **Mnemonic** | **Branch Condition**  | **Tested Condition** |
+| ------------ | --------------------- | -------------------- |
+| BZ           | Branch if  zero       | Z = 1                |
+| BNZ          | Branch if not zero    | Z = 0                |
+| BC           | Branch if carry       | C = 1                |
+| BNC          | Branch if no carry    | C = 0                |
+| BP           | Branch if plus        | S = 0                |
+| BM           | Branch if minus       | S = 1                |
+| BV           | Branch if overflow    | V = 1                |
+| BNV          | Branch if no overflow | V = 0                |
+
+## Unsigned compare conditions
+
+| **Mnemonic** | **Branch Condition**      | **Tested Condition** |
+| ------------ | ------------------------- | -------------------- |
+| BHI          | Branch if higher          | A > B                |
+| BHE          | Branch if higher or equal | A ≥ B                |
+| BLO          | Branch if lower           | A < B                |
+| BLOE         | Branch if lower or equal  | A ≤ B                |
+| BE           | Branch if equal           | A = B                |
+| BNE          | Branch if not equal       | A ≠ B                |
+
+## Signed compare conditions
+
+| **Mnemonic** | **Branch Condition**       | **Tested Condition** |
+| ------------ | -------------------------- | -------------------- |
+| BGT          | Branch if greater than     | A > B                |
+| BGE          | Branch if greater or equal | A ≥ B                |
+| BLT          | Branch if less than        | A < B                |
+| BLE          | Branch if less or equal    | A ≤ B                |
+| BE           | Branch if equal            | A = B                |
+| BNE          | Branch if not equal        | A ≠ B                |
+
+# Program Interrupt
+
+- The interrupt procedure is, in principle, quite similar to a subroutine call except for three variations: 
+  - The interrupt is usually initiated by an internal or external signal rather than from the execution of an instruction 
+  - The address of the interrupt service program is determined by the hardware rather than from the address field of an instruction
+  - An interrupt procedure usually stores all the information necessary to define the state of the CPU rather than storing only the program counter. 
+- After a program has been interrupted and the service routine been executed, the CPU must return to exactly the same state that it was when the interrupt occurred. Only if this happens will the interrupted program be able to resume exactly as if nothing had happened. 
+- The state of the CPU at the end of the execute cycle (when the interrupt is recognized) is determined from:
+  - The content of the program counter
+  - The content of all processor registers
+  - The content of certain status conditions
+- There are three major types of interrupts that cause a break in the normal execution of a program. They can be classified as:
+  - External interrupts
+  - Internal interrupts
+  - Software interrupts
+
+## External Interrupt
+
+- **External interrupts come from** 
+  - Input-output (I/O) devices
+  - Timing device
+  - Circuit monitoring the power supply
+  - Any other external source
+- **Examples that cause external interrupts are** 
+  - I/O device requesting transfer of data
+  - I/O device finished transfer of data
+  - Elapsed time of an event
+  - Power failure
+- External interrupts are asynchronous.
+- External interrupts depend on external conditions that are independent of the program being executed at the time.
+
+## Internal interrupts (Traps)
+
+- **Internal interrupts arise from** 
+  - Illegal or erroneous use of an instruction or data. 
+- **Examples of interrupts caused by internal error conditions like**
+  - Register overflow
+  - Attempt to divide by zero
+  - invalid operation code
+  - stack overflow
+  - protection violation.
+- These error conditions usually occur as a result of a premature termination of the instruction execution.
+- Internal interrupts are synchronous with the program. If the program is rerun, the internal interrupts will occur in the same place each time.
+
+## Software interrupts
+
+- Software Interrupt is invoked by the use of INT instruction. This event immediately stops execution of the program and passes execution over to the INT handler. 
+- The INT handler is usually a part of the operating system and determines the action to be taken. 
+- It occurs when an application program terminates or requests certain services from the operating system.
+- Software interrupt is triggered by software and considered one of the ways to communicate with kernel or to trigger system calls, especially during error or exception handling.
+- It is synchronous event.
+
 # RISC & CISC
 
 **Reduced Instruction Set Architecture (RISC)**
@@ -243,25 +453,17 @@
 
 - The main idea is that a single instruction will do all loading, evaluating, and storing operations just like a multiplication command will do stuff like loading data, evaluating, and storing it, hence it’s complex. 
 
+## RISC and CISC Comparison
 
+| RISC                                                        | CISC                                                         |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| Simpler instruction, hence simple instruction decoding.     | Complex instruction, hence complex instruction decoding.     |
+| Instruction comes undersize of one word.                    | Instructions are larger than one-word size.                  |
+| Fixed sized instructions                                    | Variable sized instructions                                  |
+| Simple Addressing Modes.                                    | Complex Addressing Modes.                                    |
+| Can perform only Register to Register Arithmetic operations | Can perform REG to REG or REG to MEM or MEM to MEM           |
+| Requires more number of registers                           | Requires less number of registers                            |
+| Code (program) size is large                                | Code (program) size is small                                 |
+| Instruction takes a single clock cycle to get executed.     | Instruction may take more than a single clock cycle to get executed. |
+| A pipeline processing can be achieved.                      | Pipeline processing can not be achieved.                     |
 
-# RISC & CISC Characteristics
-
-| RISC                                                    | CISC                                                         |
-| ------------------------------------------------------- | ------------------------------------------------------------ |
-| Simpler instruction, hence simple instruction decoding. | Complex instruction, hence complex instruction decoding.     |
-| Instruction comes undersize of one word.                | Instructions are larger than one-word size.                  |
-| Instruction takes a single clock cycle to get executed. | Instruction may take more than a single clock cycle to get executed. |
-| More general-purpose registers.                         | Less number of general-purpose registers as operations get performed in memory itself. |
-| Simple Addressing Modes.                                | Complex Addressing Modes.                                    |
-| A pipeline can be achieved.                             |                                                              |
-
-# RISC v/s CISC
-
-| RISC                                                        | CISC                                               |
-| ----------------------------------------------------------- | -------------------------------------------------- |
-| Fixed sized instructions                                    | Variable sized instructions                        |
-| Can perform only Register to Register Arithmetic operations | Can perform REG to REG or REG to MEM or MEM to MEM |
-| Requires more number of registers                           | Requires less number of registers                  |
-| Code size is large                                          | Code size is small                                 |
-| An instruction executed in a single clock cycle             | Instruction takes more than one clock cycle        |
