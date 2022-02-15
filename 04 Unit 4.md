@@ -39,6 +39,8 @@
   - [Software interrupts](#software-interrupts)
 - [RISC & CISC](#risc--cisc)
   - [RISC and CISC Comparison](#risc-and-cisc-comparison)
+- [Parallel Processing and Pipelining](#parallel-processing-and-pipelining)
+  - [Instruction Pipeline](#instruction-pipeline)
 
 # Stack Organization
 -  A stack is a storage device that stores information in such a manner that the item stored last is the first item retrieved (LIFO).
@@ -467,3 +469,34 @@
 | Instruction takes a single clock cycle to get executed.     | Instruction may take more than a single clock cycle to get executed. |
 | A pipeline processing can be achieved.                      | Pipeline processing can not be achieved.                     |
 
+# Parallel Processing and Pipelining
+
+- Parallel processing is a term used to denote a large class of techniques that are used to provide simultaneous data-processing tasks for the purpose of increasing the computational speed of a computer system.
+- Instead of processing each instruction sequentially as in a conventional computer, a parallel processing system is able to perform concurrent data processing to achieve faster execution time.
+- One of the method to achieve faster execution time is by using pipelining process.
+
+- Pipelining is the process of accumulating instruction from the processor through a pipeline. It allows storing and executing instructions in an orderly process. It is also known as pipeline processing.
+- Pipelining is a technique where multiple instructions are overlapped during execution. 
+- Pipeline is divided into stages and these stages are connected with one another to form a pipe like structure. Instructions enter from one end and exit from another end.
+
+- Pipelining increases the overall instruction throughput.
+- It is like a modern day factory assembly line.
+- There are two types of pipeline
+  - Arithmetic Pipeline
+  - Instruction Pipeline
+
+## Instruction Pipeline
+
+- In this a stream of instructions can be executed by overlapping fetch, decode and execute phases of an instruction cycle. This type of technique is used to increase the throughput of the computer system.
+- An instruction pipeline reads instruction from the memory while previous instructions are being executed in other segments of the pipeline. Thus we can execute multiple instructions simultaneously. 
+- The pipeline will be more efficient if the instruction cycle is divided into segments of equal duration. 
+
+**For example Instruction execution can be divided into 5 stages.**
+
+- **IF (Instruction Fetch)** - In the first subtask, the instruction is fetched.
+- **ID (Instruction Decode)** - The fetched instruction is decoded in the second stage.
+- **OF (Operand Fetch)** - In the third stage, the operands of the instruction are fetched.
+- **IE (Instruction Execute)** - In the fourth, arithmetic and logical operation are performed on the operands to execute the instruction.
+- **OS (Operand Store)** - In the fifth stage, the result is stored in memory.
+
+![image-20220215091703436](images/image-20220215091703436.png)
